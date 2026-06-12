@@ -1,27 +1,35 @@
-## Modules
+# Stock Maintenance System
 
-### Transaction Management
-Record incoming and outgoing inventory transactions.
+Inventory Management System built using Google Apps Script, HTML, JavaScript and Google Sheets.
 
-### Transaction Filter
-Filter transactions by date range and personnel.
+## Features
 
-### Inventory Master
-Manage item codes, item names, units, and stock levels.
+- Login multi user
+- Role based access
+- Purchasing admin access
+- Stock In / Stock Out transaction
+- Real-time stock validation
+- Barcode support
+- Auto item suggestion
+- Dashboard analytics
+- Stock opname module
+- Procurement module
+- Transaction history
+- Mobile friendly interface
 
-### Stock Opname
-Generate stock audit and inventory checking reports.
+## Technology
 
-### Procurement Planning
-Calculate restocking requirements and procurement costs.
+- Google Apps Script
+- Google Sheets
+- HTML
+- CSS
+- JavaScript
+- Chart.js
 
-### Barcode Integration
-Support barcode scanning through Google Lens and Google Apps Script Web App.
+## Screenshots
 
-### User Authentication
-Support user mode and purchasing mode with access control.
-## Documentation
-
-Detailed user guide is available in:
-
-Panduan Sistem Stok Barang.docx
+Dashboard
+Transaction Module
+Stock Master
+Stock Opname
+Procurement Module
