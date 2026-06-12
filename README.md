@@ -33,3 +33,22 @@ Transaction Module
 Stock Master
 Stock Opname
 Procurement Module
+
+
+
+## Modules
+
+### 1. Transaction Module
+Record stock in and stock out transactions.
+
+### 2. Stock Master
+Manage inventory master data and current stock.
+
+### 3. Stock Opname
+Generate stock opname reports and inventory verification.
+
+### 4. Procurement
+Monitor inventory shortages and procurement requirements.
+
+### 5. Dashboard
+View stock movement statistics and transaction analytics.
