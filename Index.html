@@ -1,1 +1,1353 @@
+<!doctype html>
+<html>
+    
+  <head>
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#1e5f9f" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="Stok Maintenance" />
 
+    <title>STOK MAINTENANCE</title>
+
+    <style>
+      * {
+        box-sizing: border-box;
+      }
+
+      html,
+      body {
+        height: 100%;
+        margin: 0;
+        padding: 0;
+      }
+
+      body {
+        font-family: Arial, sans-serif;
+        background: #e8f0fe;
+        font-size: 40px;
+        display: flex;
+        flex-direction: column;
+      }
+
+      h2 {
+        font-size: 60px;
+        font-weight: 800;
+        margin: 16px;
+      }
+
+      .muted {
+        font-size: 40px;
+        margin: 0 16px 16px;
+        color: #444;
+      }
+
+      .card {
+        background: #fff;
+        border-radius: 16px;
+        padding: 20px;
+        margin: 0 16px 16px;
+      }
+
+      label {
+        font-size: 40px;
+        font-weight: 700;
+        margin-top: 24px;
+        display: block;
+      }
+
+      input,
+      select {
+        width: 100%;
+        padding: 18px;
+        font-size: 40px;
+        margin-top: 10px;
+        border-radius: 12px;
+        border: 2px solid #dadce0;
+      }
+
+      input[readonly] {
+        background: #f5f5f5;
+      }
+
+      #msg {
+        margin-top: 12px;
+        padding: 22px;
+        border-radius: 18px;
+        font-size: 45px;
+        font-weight: 800;
+        display: none;
+        text-align: center;
+        white-space: pre-line;
+      }
+
+      body {
+        font-family: "Segoe UI", Arial, sans-serif;
+        background: linear-gradient(180deg, #1e5f9f, #e8f0fe);
+        margin: 0;
+        font-size: 32px;
+      }
+
+      .header {
+        text-align: center;
+        padding: 50px 20px 35px;
+        background: linear-gradient(135deg, #1e5f9f, #0d3c6e);
+        border-bottom-left-radius: 40px;
+        border-bottom-right-radius: 40px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.25);
+        color: white;
+      }
+
+      .logo {
+        width: 220px;
+        background: white;
+        padding: 15px 25px;
+        border-radius: 30px;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.25);
+        margin-bottom: 25px;
+      }
+
+      .header h1 {
+        margin: 0;
+        font-size: 55px;
+        font-weight: 900;
+        letter-spacing: 2px;
+        color: white;
+      }
+
+      .company {
+        margin-top: 10px;
+        font-size: 35px;
+        font-weight: 500;
+        opacity: 0.9;
+      }
+
+      .card {
+        background: #fff;
+        border-radius: 20px;
+        padding: 22px;
+        margin: 18px;
+        box-shadow: 0 10px 22px rgba(0, 0, 0, 0.1);
+      }
+
+      button {
+        background: linear-gradient(90deg, #1e5f9f, #0d3c6e);
+        border-radius: 12px;
+        color: #fff;
+      }
+
+      button:hover {
+        opacity: 0.95;
+        transform: translateY(-2px);
+        transition: 0.15s ease-out;
+      }
+
+      .btn-primary {
+        width: 100%;
+        padding: 24px;
+        font-size: 40px;
+        font-weight: 900;
+        border-radius: 16px; /* samakan radius dengan input */
+        border: 2px solid #dadce0; /* sama seperti input */
+
+        background: linear-gradient(90deg, #1e5f9f, #0d3c6e);
+        color: #fff;
+
+        /* 🔥 Ring putih ukuran sama seperti input */
+        box-shadow: 0 0 0 4px rgba(255, 255, 255, 0.35);
+
+        transition: all 0.2s ease;
+        margin-top: 18px;
+      }
+
+      .btn-primary:active {
+        transform: scale(0.97);
+        box-shadow: 0 0 0 6px rgba(255, 255, 255, 0.5);
+      }
+
+      .loading-btn {
+        position: relative;
+        pointer-events: none;
+        opacity: 0.8;
+      }
+
+      .loading-btn::after {
+        content: "";
+        position: absolute;
+        right: 20px;
+        top: 50%;
+        width: 26px;
+        height: 26px;
+        margin-top: -13px;
+        border: 4px solid rgba(255, 255, 255, 0.3);
+        border-top: 4px solid white;
+        border-radius: 50%;
+        animation: spin 0.6s linear infinite;
+      }
+
+      @keyframes spin {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+#loginScreen {
+  transform: scale(1.2);
+  transform-origin: center;
+}
+
+#suggestBox div:hover {
+  background: #1e5f9f !important;
+  color: white !important;
+  transform: scale(1.02);
+  transition: 0.15s;
+}
+
+#suggestBox div {
+  width: 100%;
+}
+
+#suggestBox div:hover {
+  background: #0d3c6e !important;
+  color: white !important;
+  transform: scale(1.01);
+}
+
+#qty:disabled {
+  background: #eee;
+  color: #999;
+  cursor: not-allowed;
+}
+
+#pos {
+  background: white;
+  color: black;
+  font-weight: 600;
+
+  border: 2px solid #dadce0;
+  border-radius: 12px;
+  padding: 12px;
+
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+
+  background-image: url("data:image/svg+xml;utf8,<svg fill='black' height='24' viewBox='0 0 24 24' width='24'><path d='M7 10l5 5 5-5z'/></svg>");
+  background-repeat: no-repeat;
+  background-position: right 15px center;
+  background-size: 20px;
+}
+
+#pos:focus {
+  background: #1e5f9f;
+  color: white;
+  outline: none;
+
+  background-image: url("data:image/svg+xml;utf8,<svg fill='white' height='24' viewBox='0 0 24 24' width='24'><path d='M7 10l5 5 5-5z'/></svg>");
+}
+
+    </style>
+
+      <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  </head>
+
+  <body>
+<!-- ================= LOGIN SCREEN ================= -->
+<div
+  id="loginScreen"
+  style="
+    display:flex;
+    position:fixed;
+    inset:0;
+    background:#1e5f9f;
+    align-items:center;
+    justify-content:center;
+    z-index:10000;
+  "
+>
+  <div
+    style="
+      background:white;
+      padding:50px;
+      border-radius:30px;
+      width:600px;
+      max-width:90%;
+      text-align:center;
+    "
+  >
+    <h2>Pilih Petugas</h2>
+
+    <button
+      class="loginBtn"
+      style="margin:10px;padding:20px 40px;font-size:28px;"
+    >
+      HENDRA
+    </button>
+
+    <button
+      class="loginBtn"
+      style="margin:10px;padding:20px 40px;font-size:28px;"
+    >
+      ANGGA
+    </button>
+
+    <button
+      class="loginBtn"
+      style="margin:10px;padding:20px 40px;font-size:28px;"
+    >
+      AGUS
+    </button>
+
+    <button
+      class="loginBtn"
+      style="margin:10px;padding:20px 40px;font-size:28px;"
+    >
+      SUTIKNO
+    </button>
+
+    <button
+      id="btnPurchasing"
+      style="margin:10px;padding:20px 40px;font-size:28px;"
+    >
+      PURCHASING
+    </button>
+  </div>
+</div>
+
+<!-- HEADER CORPORATE -->
+<div class="header">
+<img src="data:image/png;base64,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" class="logo" alt="Ligno Logo">
+  <h1>STOK MAINTENANCE</h1>
+  <div class="company">PT Ligno Specialty Chemicals</div>
+</div>
+
+<div class="card">
+
+  <button id="btnDashboard" class="btn-primary" style="margin-top:20px;">
+  📊 Dashboard
+</button>
+
+  <label>Kode Barang</label>
+  <input 
+  id="code" 
+  type="tel"
+  inputmode="numeric"
+  pattern="[0-9]*"
+  placeholder="Ketik Kode, lalu pilih barangnya"
+  autocomplete="off"
+/>
+
+  <div
+    id="suggestBox"
+style="
+  width:100%;
+  padding:8px;
+      background:#fff;
+      border:2px solid #dadce0;
+      border-radius:12px;
+      max-height:320px;
+      overflow:auto;
+      display:none;
+      margin-top:10px;
+    "
+  ></div>
+
+  <label>Nama Barang</label>
+  <input
+    id="name"
+    placeholder="Otomatis dari Stok Barang"
+    readonly
+  />
+
+  <label>Stok Tersedia</label>
+  <input id="stok" readonly />
+
+  <div id="typeWrapper" style="display:none;">
+    <label>Tipe</label>
+    <select id="type">
+      <option value="MASUK">MASUK</option>
+      <option value="KELUAR">KELUAR</option>
+    </select>
+  </div>
+
+<!-- QTY -->
+<label>
+  Qty <span style="color:red">*</span>
+</label>
+
+<input
+  id="qty"
+  type="number"
+  step="any"
+  inputmode="decimal"
+  placeholder="Contoh 3"
+/>
+
+<!-- POS -->
+<div id="posWrapper" style="display:none; margin-top:16px;">
+  <label>Pos / Tujuan <span style="color:red">*</span></label>
+  <select id="pos">
+    <option value="">-- Pilih Tujuan --</option>
+    <option value="Perbaikan Kantor">Perbaikan Kantor</option>
+    <option value="Perbaikan Gudang">Perbaikan Gudang</option>
+    <option value="Keperluan Peralatan dan Produksi">Keperluan Peralatan dan Produksi</option>
+    <option value="Perbaikan Mesin">Perbaikan Mesin</option>
+    <option value="Perbaikan Mesin">Pengembalian Barang</option>
+  </select>
+</div>
+
+<!-- CATATAN -->
+<div id="catatanWrapper" style="display:none; margin-top:16px;">
+  <label>Catatan</label>
+  <input id="catatan" placeholder="Contoh: loss 3" />
+</div>
+
+<!-- BUTTON -->
+<button id="btnSave" class="btn-primary">
+  💾 Simpan Transaksi
+</button>
+
+
+  <div
+    id="loading"
+    style="
+      display:none;
+      margin-top:10px;
+      font-size:32px;
+      font-weight:700;
+      color:#1a73e8;
+    "
+  >
+    ⏳ Menyimpan transaksi...
+  </div>
+
+  <div
+    id="msg"
+    style="
+      margin-top:12px;
+      padding:14px;
+      border-radius:12px;
+      font-size:40px;
+      display:none;
+    "
+  ></div>
+</div>
+<!-- ✅ TUTUP .card DI SINI -->
+
+<script>
+  /* ========= BEEP ENGINE ========= */
+  let audioCtx = null;
+
+  function initAudio() {
+    if (!audioCtx) {
+      const AudioContext =
+        window.AudioContext || window.webkitAudioContext;
+      audioCtx = new AudioContext();
+    }
+  }
+
+
+document.addEventListener("click", function unlockAudio() {
+  initAudio();
+  if (audioCtx && audioCtx.state === "suspended") {
+    audioCtx.resume();
+  }
+  document.removeEventListener("click", unlockAudio);
+});
+
+
+function playBeep() {
+
+  initAudio();
+
+  if (!audioCtx) return;
+
+  if (audioCtx.state === "suspended") {
+    audioCtx.resume();
+  }
+
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+
+  osc.type = "square";
+  osc.frequency.value = 1000;
+  gain.gain.value = 0.3;
+
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
+
+  osc.start();
+  setTimeout(() => osc.stop(), 120);
+}
+
+function playSaveBeep() {
+  if (!audioCtx) return;
+
+  if (audioCtx.state === 'suspended') {
+    audioCtx.resume();
+  }
+
+  const osc = audioCtx.createOscillator();
+  const gain = audioCtx.createGain();
+
+  osc.type = 'square';
+  osc.frequency.value = 1000;
+  gain.gain.value = 0.25;
+
+  osc.connect(gain);
+  gain.connect(audioCtx.destination);
+
+  osc.start();
+  setTimeout(() => osc.stop(), 120);
+}
+
+// TARUH DI SINI ↓↓↓
+function speakTransaction(type, qty) {
+  if (!('speechSynthesis' in window)) return;
+
+  const utter = new SpeechSynthesisUtterance(
+type === "MASUK"
+  ? `Barang masuk ${qty}`
+  : `Barang keluar ${qty}`
+  );
+
+  utter.lang = "id-ID";
+  utter.rate = 0.95;
+
+  speechSynthesis.cancel();
+  speechSynthesis.speak(utter);
+}
+
+  const msg = document.getElementById('msg');
+
+  const elCode = document.getElementById('code');
+  const elName = document.getElementById('name');
+  const elType = document.getElementById('type');
+  const elQty = document.getElementById('qty');
+  const elCatatan = document.getElementById('catatan');
+  const elPos = document.getElementById('pos');
+  elQty.placeholder = "Pilih barang dulu";
+  elQty.disabled = true;
+  const elStok = document.getElementById('stok');
+  const btnSave = document.getElementById('btnSave');
+
+  // 🔒 Awal: tombol tidak aktif
+  btnSave.disabled = true;
+  btnSave.style.opacity = '0.5';
+
+  function showLoading() {
+    btnSave.disabled = true;
+    btnSave.classList.add('loading-btn');
+    btnSave.textContent = "Menyimpan...";
+  }
+
+  function hideLoading() {
+    btnSave.disabled = false;
+    btnSave.classList.remove('loading-btn');
+    btnSave.textContent = "💾 Simpan Transaksi";
+  }
+
+  /* ========= MASTER LIST + SUGGEST (HP FRIENDLY) ========= */
+  let MASTER = [];
+  let MASTER_MAP = {};
+  let MASTER_READY = false;
+
+
+  
+  function renderSuggest(items) {
+    const box = document.getElementById('suggestBox');
+    if (!box) return;
+
+    if (!items || !items.length) {
+      box.style.display = 'none';
+      box.innerHTML = '';
+      return;
+    }
+
+    box.innerHTML = items
+      .map(it => {
+        const kode = (it.code || it.barcode || '')
+          .replace(/"/g, '&quot;');
+
+        const nama = (it.name || '')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;');
+
+return `
+  <div data-code="${kode}"
+      style="
+        padding:24px;
+        cursor:pointer;
+        display:flex;
+        align-items:center;
+        gap:16px;
+        background:#1e5f9f;
+        font-size:42px;
+        font-weight:800;
+        color:white;
+        border-radius:14px;
+        margin:8px 0;
+        width:100%;
+      ">
+      
+      <span style="
+        white-space:nowrap;
+        color:white;
+        font-weight:900;
+      ">
+        ${kode}
+      </span>
+
+      <span style="
+        font-weight:900;
+        color:rgba(255,255,255,0.7);
+      ">
+        |
+      </span>
+
+      <span style="
+        flex:1;
+        font-weight:700;
+        color:white;
+      ">
+        ${nama}
+      </span>
+
+  </div>
+`;
+      })
+      .join('');
+
+    box.style.display = 'block';
+
+    box.querySelectorAll('[data-code]').forEach(el => {
+      el.addEventListener('click', () => {
+        const kode = el.getAttribute('data-code');
+
+        playBeep();
+
+        // SET VALUE DULU
+        elCode.value = kode;
+
+        box.style.display = 'none';
+        box.innerHTML = '';
+
+        // PAKSA UPDATE STOK
+setTimeout(() => {
+  turboLookup(kode); // 🔥 INI YANG BENAR
+  elQty.focus();
+}, 100);
+      });
+    });
+  }
+
+  function showSuggest(query) {
+    const box = document.getElementById('suggestBox');
+    if (!box) return;
+
+    const q = (query || '').toLowerCase().trim();
+
+    if (!q) {
+      box.style.display = 'none';
+      box.innerHTML = '';
+      return;
+    }
+
+    const hits = MASTER
+      .filter(it =>
+        (it.code && it.code.toLowerCase().includes(q)) ||
+        (it.name && it.name.toLowerCase().includes(q)) ||
+        (it.barcode && it.barcode.toLowerCase().includes(q))
+      )
+      .slice(0, 20);
+
+    renderSuggest(hits);
+  }
+
+  // Load master list sekali saat halaman dibuka
+let CACHE_DURATION = 0; 
+
+function loadMasterFast() {
+
+  const now = Date.now();
+  const cached = localStorage.getItem("MASTER_CACHE");
+  const cacheTime = localStorage.getItem("MASTER_CACHE_TIME");
+
+  // 🔥 Kalau ada cache dan belum 5 menit → pakai cache
+  if (cached && cacheTime && (now - cacheTime < CACHE_DURATION)) {
+
+    MASTER = JSON.parse(cached);
+    rebuildMasterMap();
+    MASTER_READY = true;
+    console.log("MASTER dari CACHE");
+    return;
+  }
+
+  // 🔥 Kalau tidak ada cache → ambil dari server
+  google.script.run
+    .withSuccessHandler(items => {
+
+      MASTER = items || [];
+
+      localStorage.setItem("MASTER_CACHE", JSON.stringify(MASTER));
+      localStorage.setItem("MASTER_CACHE_TIME", now);
+
+      rebuildMasterMap();
+      MASTER_READY = true;
+
+      console.log("MASTER dari SERVER");
+
+    })
+    .getMasterList();
+}
+
+function rebuildMasterMap() {
+
+  MASTER_MAP = {};
+
+  MASTER.forEach(it => {
+    if (it.code) MASTER_MAP[it.code.toUpperCase()] = it;
+    if (it.barcode) MASTER_MAP[it.barcode.toUpperCase()] = it;
+  });
+}
+
+// 🔥 Jalankan saat halaman dibuka
+loadMasterFast();
+google.script.run
+  .withSuccessHandler(data => {
+    DASHBOARD_CACHE = data;
+  })
+  .getDashboardData();
+
+function setMsg(text, ok = true, type = '') {
+
+  msg.style.display = 'block';
+  msg.textContent = text;
+
+  if (!ok) {
+    msg.style.background = '#fce8e6';
+    msg.style.color = '#a50e0e';
+    msg.style.border = '2px solid #d93025';
+    return;
+  }
+
+  // 🔵 MASUK = Biru
+  if (type === 'MASUK') {
+    msg.style.background = '#e8f0fe';
+    msg.style.color = '#0b57d0';
+    msg.style.border = '2px solid #1a73e8';
+  }
+
+  // 🟢 KELUAR = Hijau
+  else if (type === 'KELUAR') {
+    msg.style.background = '#e6f4ea';
+    msg.style.color = '#137333';
+    msg.style.border = '2px solid #34a853';
+  }
+
+  // Default success
+  else {
+    msg.style.background = '#e6f4ea';
+    msg.style.color = '#137333';
+    msg.style.border = '2px solid #34a853';
+  }
+}
+
+function normalizeCode(raw) {
+
+  return (raw || '')
+    .toString()
+    .replace(/[\r\n\t]/g, '') // 🔥 hapus karakter scanner
+    .replace(/\s+/g, '')      // 🔥 hapus semua spasi
+    .trim()
+    .toUpperCase();
+
+}
+
+
+function lookupMaster() {
+
+  const clean = normalizeCode(elCode.value).toUpperCase();
+  if (!clean) return;
+
+  const item = MASTER.find(x =>
+    (x.code && x.code.toUpperCase() === clean) ||
+    (x.barcode && x.barcode.toUpperCase() === clean)
+  );
+
+  if (!item) {
+    setMsg('Barang tidak ditemukan', false);
+    return;
+  }
+
+  elName.value = item.name;
+  elStok.value = item.stock;
+
+  setMsg(`STOK TERSEDIA: ${item.stock}`, true);
+}
+
+
+function turboLookup(code) {
+
+  const clean = normalizeCode(code);
+  const item = MASTER_MAP[clean];
+
+  if (!item) {
+    setMsg("Barang tidak ditemukan (LOCAL)", false);
+    return;
+  }
+
+  elCode.value = item.code;
+  elName.value = item.name;
+  elStok.value = item.stock;
+  elQty.disabled = false;
+elQty.placeholder = "Contoh: 3";
+
+  // 🔥 BUKA QTY
+  elQty.disabled = false;
+
+  setMsg(`STOK TERSEDIA: ${item.stock}`, true);
+}
+
+
+
+
+elCode.addEventListener('input', () => {
+
+  const code = normalizeCode(elCode.value);
+
+  // 🔒 KUNCI QTY
+  elQty.disabled = true;
+elQty.placeholder = "Pilih barang dulu";
+
+  showSuggest(code);
+
+});
+
+
+elCode.addEventListener('keydown', function (e) {
+
+  if (e.key === 'Enter') {
+
+    e.preventDefault(); // penting
+
+    const finalCode = normalizeCode(elCode.value);
+
+    turboLookup(finalCode);
+
+    elQty.focus();
+
+  }
+
+});
+
+btnSave.addEventListener('click', () => {
+
+  initAudio();
+
+  if (!CURRENT_USER) {
+    return setMsg('Pilih petugas.', false);
+  }
+
+  const code = normalizeCode(elCode.value);
+  if (!code) {
+    return setMsg('Kode kosong.', false);
+  }
+
+const qtyNumber = Number(elQty.value);
+if (isNaN(qtyNumber)) {
+  return setMsg('Qty harus angka', false);
+}
+
+// 🔥 PINDAH KE SINI (WAJIB DI ATAS)
+if (CURRENT_ROLE === "USER" && !elPos.value) {
+  return setMsg("Pos / Tujuan wajib diisi!", false);
+}
+
+if (qtyNumber === 0) {
+  return setMsg('Qty tidak boleh 0', false);
+}
+
+  let finalType = elType.value;
+
+  if (CURRENT_ROLE === "USER") {
+    finalType = "KELUAR";
+  }
+
+  let stokSekarang = Number(elStok.value) || 0;
+  let stokBaru = stokSekarang;
+
+  if (finalType === "MASUK") {
+    stokBaru += qtyNumber;
+  } else {
+    if (qtyNumber > stokSekarang) {
+      return setMsg(`STOK TIDAK CUKUP. STOK: ${stokSekarang}`, false);
+    }
+    stokBaru -= qtyNumber;
+  }
+
+// Update UI dulu (cepat)
+elStok.value = stokBaru;
+
+// suara google
+speakTransaction(finalType, qtyNumber);
+
+// tampil pesan
+setMsg(
+  `✅ ${elName.value}\n${finalType}: ${qtyNumber}\nSTOK TERSEDIA: ${stokBaru}`,
+  true,
+  finalType
+);
+
+const payload = {
+  code: code,
+  type: finalType,
+  qty: qtyNumber,
+  petugas: CURRENT_USER,
+  password: window.purchasingPassword || '',
+  catatan: elCatatan.value || '',
+  pos: elPos.value || '' // 🔥 TAMBAH INI
+};
+
+// Reset form
+elCode.value = '';
+elName.value = '';
+elQty.value = '';
+elCatatan.value = '';
+elPos.value = '';
+
+  // Kirim ke server
+google.script.run
+  .withSuccessHandler(res => {
+
+    // 🔴 Kalau server menolak
+    if (!res.ok) {
+      elStok.value = stokSekarang;
+      setMsg(res.message || "Gagal simpan.", false);
+      return;
+    }
+// 🟢 Kalau sukses
+if (res.ok) {
+
+  // Update stok lokal dulu
+  const index = MASTER.findIndex(it => it.code === code);
+  if (index !== -1) {
+    MASTER[index].stock = stokBaru;
+  }
+
+  // 🔥 Refresh MASTER dari server supaya ambil stok terbaru
+  google.script.run
+    .withSuccessHandler(items => {
+
+      MASTER = items || [];
+      rebuildMasterMap();
+
+      localStorage.setItem("MASTER_CACHE", JSON.stringify(MASTER));
+      localStorage.setItem("MASTER_CACHE_TIME", Date.now());
+
+      console.log("MASTER direfresh setelah transaksi");
+
+    })
+    .getMasterList();
+}
+
+  })
+  .withFailureHandler(() => {
+    elStok.value = stokSekarang;
+    setMsg("Gagal simpan ke server.", false);
+  })
+  .submitTransaction(payload);
+
+});
+</script>
+
+<script>
+const urlCode = "<?= prefillCode ?>";
+
+if (urlCode) {
+
+  const clean = normalizeCode(urlCode);
+
+  // Tunggu MASTER siap
+  const waitMaster = setInterval(() => {
+
+    if (!MASTER_READY) return;
+
+    clearInterval(waitMaster);
+
+    const item = MASTER_MAP[clean];
+
+    if (!item) {
+      setMsg("Barang tidak ditemukan", false);
+      return;
+    }
+
+    elCode.value = item.code;
+    elName.value = item.name;
+    elStok.value = item.stock;
+
+    initAudio();
+    playBeep(); 
+
+    setMsg(`STOK TERSEDIA: ${item.stock}`, true);
+
+    elQty.focus();
+
+  }, 50);
+}
+</script>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function () {
+    const ls = document.getElementById('loadingScreen');
+    if (ls) {
+      ls.style.display = 'none';
+    }
+  });
+</script>
+
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+
+    function openPwModal() {
+      document.getElementById("pwModal").style.display = "flex";
+      document.getElementById("pwInput").value = "";
+      document.getElementById("pwError").style.display = "none";
+      document.getElementById("pwInput").focus();
+    }
+
+    function closePwModal() {
+      document.getElementById("pwModal").style.display = "none";
+    }
+
+    window.openPwModal = openPwModal;
+
+    // ✅ LOGIN BUTTON
+    document.getElementById("pwBtn").addEventListener("click", function () {
+
+      const pw = document.getElementById("pwInput").value;
+
+      google.script.run
+        .withSuccessHandler(res => {
+
+          if (!res.ok) {
+            document.getElementById("pwError").style.display = "block";
+            document.getElementById("pwInput").value = "";
+            document.getElementById("pwInput").focus();
+            return;
+          }
+
+          window.purchasingPassword = pw;
+
+          document.getElementById('typeWrapper').style.display = 'block';
+          btnSave.disabled = false;
+          btnSave.style.opacity = '1';
+
+          closePwModal();
+          setMsg("Login Purchasing berhasil", true);
+
+        })
+        .validatePurchasingPassword(pw);
+
+    });
+
+    // ✅ CANCEL BUTTON (DI LUAR pwBtn!)
+    document.getElementById("pwCancel").addEventListener("click", function () {
+
+      closePwModal();
+
+      window.purchasingPassword = '';
+
+    });
+
+  });
+</script>
+
+<!-- 🔐 MODAL PASSWORD PURCHASING -->
+<div
+  id="pwModal"
+  style="
+    position:fixed;
+    inset:0;
+    background:rgba(0,0,0,0.6);
+    display:none;
+    align-items:center;
+    justify-content:center;
+    z-index:9999;
+  "
+>
+  <div
+    style="
+      background:white;
+      padding:40px;
+      border-radius:20px;
+      width:500px;
+      max-width:90%;
+      text-align:center;
+    "
+  >
+    <h2 style="margin-top:0;">Login Purchasing</h2>
+
+    <input
+      id="pwInput"
+      type="password"
+      placeholder="Masukkan Password"
+      style="width:100%;font-size:32px;padding:15px;margin-top:20px;"
+    />
+
+    <div
+      id="pwError"
+      style="color:red;font-size:28px;margin-top:15px;display:none;"
+    >
+      Password salah!
+    </div>
+
+    <div style="margin-top:25px;display:flex;gap:15px;justify-content:center;">
+
+      <button
+        id="pwCancel"
+        style="padding:15px 30px;font-size:30px;background:#ccc;color:#000;"
+      >
+        Batal
+      </button>
+
+      <button
+        id="pwBtn"
+        style="padding:15px 30px;font-size:30px;"
+      >
+        Login
+      </button>
+
+    </div>
+  </div>
+</div>
+
+
+
+<script>
+
+  let CURRENT_USER = null;
+  let CURRENT_ROLE = "USER";
+
+document.addEventListener("DOMContentLoaded", function () {
+
+const savedUser = localStorage.getItem("petugasLogin");
+const isPurchasing = localStorage.getItem("isPurchasingLogin");
+
+if (savedUser === "PURCHASING" && isPurchasing === "true") {
+
+  CURRENT_USER = "PURCHASING";
+  CURRENT_ROLE = "ADMIN";
+
+  window.purchasingPassword = localStorage.getItem("purchasingPassword") || '';
+
+  document.getElementById("loginScreen").style.display = "none";
+  document.getElementById('typeWrapper').style.display = 'block';
+  document.getElementById('catatanWrapper').style.display = 'block';
+
+  btnSave.disabled = false;
+  btnSave.style.opacity = '1';
+
+  setMsg("Login Purchasing aktif", true);
+
+} else if (savedUser) {
+
+  document.getElementById("loginScreen").style.display = "none";
+  setUser(savedUser);
+
+} else {
+
+  document.getElementById("loginScreen").style.display = "flex";
+
+}
+
+  document.querySelectorAll(".loginBtn").forEach(btn => {
+    btn.addEventListener("click", function () {
+      const name = this.textContent.trim();
+      localStorage.setItem("petugasLogin", name);
+      setUser(name);
+    });
+  });
+
+document.getElementById("btnPurchasing").addEventListener("click", function () {
+
+  const pw = prompt("Masukkan Password Purchasing:");
+  if (!pw) return;
+
+  google.script.run
+    .withSuccessHandler(res => {
+
+      if (!res.ok) {
+        alert("Password salah!");
+        return;
+      }
+
+      // 🔥 SIMPAN LOGIN PERMANEN
+      localStorage.setItem("petugasLogin", "PURCHASING");
+      localStorage.setItem("isPurchasingLogin", "true");
+      localStorage.setItem("purchasingPassword", pw);
+
+      window.purchasingPassword = pw;
+
+      setUser("PURCHASING");
+
+    })
+    .validatePurchasingPassword(pw);
+
+});
+
+});
+
+function setUser(name) {
+
+  CURRENT_USER = name;
+
+  if (name === "PURCHASING") {
+    CURRENT_ROLE = "ADMIN";
+    document.getElementById('typeWrapper').style.display = 'block';
+
+    document.getElementById('catatanWrapper').style.display = 'block';
+    document.getElementById('posWrapper').style.display = 'none'; // 🔥 INI
+
+  } else {
+    CURRENT_ROLE = "USER";
+    document.getElementById('typeWrapper').style.display = 'none';
+
+    document.getElementById('catatanWrapper').style.display = 'none';
+    document.getElementById('posWrapper').style.display = 'block'; // 🔥 INI
+  }
+
+  btnSave.disabled = false;
+  btnSave.style.opacity = '1';
+
+  document.getElementById("loginScreen").style.display = "none";
+  setMsg("Login sebagai: " + name, true);
+}
+
+  function logoutUser() {
+    localStorage.removeItem("petugasLogin");
+    location.reload();
+  }
+
+</script>
+<!-- DASHBOARD MODAL -->
+<div id="dashboardModal" style="
+position:fixed;
+inset:0;
+background:rgba(0,0,0,0.6);
+display:none;
+justify-content:center;
+align-items:center;
+z-index:9999;
+">
+
+<div style="
+background:white;
+width:95%;
+max-width:900px;
+padding:30px;
+border-radius:20px;
+max-height:90vh;
+overflow:auto;
+">
+
+<h2 style="margin-top:0;">📊 Dashboard Stok</h2>
+
+<div id="summaryBox" style="font-size:24px;margin-bottom:20px;"></div>
+
+<canvas id="chartCanvas" height="120"></canvas>
+
+<br>
+
+<button onclick="closeDashboard()" 
+style="padding:12px 20px;font-size:20px;">
+Tutup
+</button>
+
+</div>
+</div>
+
+<script>
+
+let dashboardChart = null;
+let dashboardInterval = null;
+
+document.getElementById("btnDashboard").addEventListener("click", function(){
+
+  openDashboard();
+
+  // Load pertama
+  loadDashboard();
+
+  // Auto refresh tiap 5 detik
+  dashboardInterval = setInterval(loadDashboard, 1000);
+
+});
+
+function loadDashboard(){
+  google.script.run
+    .withSuccessHandler(renderDashboard)
+    .getDashboardData();
+}
+
+function openDashboard(){
+  document.getElementById("dashboardModal").style.display = "flex";
+}
+
+function closeDashboard(){
+  document.getElementById("dashboardModal").style.display = "none";
+
+  if (dashboardInterval) {
+    clearInterval(dashboardInterval);
+    dashboardInterval = null;
+  }
+}
+
+function renderDashboard(data){
+
+  const s = data.summary;
+  const netColor = s.net >= 0 ? "green" : "red";
+
+  document.getElementById("summaryBox").innerHTML = `
+    <b>Total Masuk:</b> ${s.totalMasuk} <br>
+    <b>Total Keluar:</b> ${s.totalKeluar} <br>
+    <b style="color:${netColor}">Net:</b> ${s.net}
+  `;
+
+  const labels = data.daily.map(d => d.date);
+  const masukData = data.daily.map(d => d.masuk);
+  const keluarData = data.daily.map(d => d.keluar);
+
+  const ctx = document.getElementById("chartCanvas");
+
+  if (dashboardChart) dashboardChart.destroy();
+
+  dashboardChart = new Chart(ctx, {
+    type: "bar",
+    data: {
+      labels: labels,
+      datasets: [
+        {
+          label: "MASUK",
+          data: masukData,
+          backgroundColor: "#1a73e8"
+        },
+        {
+          label: "KELUAR",
+          data: keluarData,
+          backgroundColor: "#d93025"
+        }
+      ]
+    },
+    options: { responsive: true }
+  });
+
+}
+
+function closeDashboard(){
+  document.getElementById("dashboardModal").style.display = "none";
+}
+
+</script>
+</body>
+</html>
