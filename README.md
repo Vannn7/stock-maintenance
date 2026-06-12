@@ -20,3 +20,8 @@ Support barcode scanning through Google Lens and Google Apps Script Web App.
 
 ### User Authentication
 Support user mode and purchasing mode with access control.
+## Documentation
+
+Detailed user guide is available in:
+
+Panduan Sistem Stok Barang.docx
